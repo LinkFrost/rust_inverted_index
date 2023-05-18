@@ -1,6 +1,6 @@
 # Rust Inverted Index
 
-[**VIDEO PRESENTATION**](https://www.dropbox.com/home?preview=COMPSCI+377+-+Rust+Inverted+Index.mp4)
+[**VIDEO PRESENTATION**](https://www.dropbox.com/s/s2xvns09wxkkz25/COMPSCI%20377%20-%20Rust%20Inverted%20Index.mp4?dl=0)
 
 ## Overview
 
