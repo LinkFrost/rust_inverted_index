@@ -1,0 +1,2 @@
+test_inputs/pr1_original/foo1.txt
+test_inputs/pr1_original/foo2.txt

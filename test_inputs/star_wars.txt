@@ -1,0 +1,4 @@
+test_inputs/star_wars/hello_there.txt
+test_inputs/star_wars/plagueis.txt
+test_inputs/star_wars/episode_three_crawl.txt
+test_inputs/star_wars/luthen.txt
