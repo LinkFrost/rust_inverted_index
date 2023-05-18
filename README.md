@@ -1,5 +1,7 @@
 # Rust Inverted Index
 
+[**VIDEO PRESENTATION**](https://youtu.be/Hgs0JNseZt0)
+
 ## Overview
 
 This project started out as recreating the Inverted Index project from COMPSCI 377 at UMass Amherst. The original project was done in C++, this implementation is done in Rust. On top of replicating the original functionality of the project, this was also turned into a multithreaded program to allow for faster index creation when dealing with large files.
