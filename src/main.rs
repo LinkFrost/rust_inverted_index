@@ -102,7 +102,7 @@ fn build_inverted_index(input: &String) -> BTreeMap<String, BTreeSet<usize>> {
 
 fn main() {
   let args: Vec<String> = env::args().collect();
-  assert_eq!(args.len(), 2, "Usage: cargo run -- <input.txt>");
+  assert_eq!(args.len(), 2, "Usage: cargo run -- <input.txt> OR target/debug/rust_inverted_index <input.txt>");
 
   let inputs_file = &args[1];
   let inverted_index: BTreeMap<String, BTreeSet<usize>> = build_inverted_index(inputs_file);
