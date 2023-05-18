@@ -74,6 +74,26 @@ In `main.rs`, the program will open up the input text file and loop over each li
 
 This program uses multithreading, so that each document file is handled by a new thread. Locks and mutex's are used to ensure thread synchronization and safety.
 
+## Design Decisions
+
+For this project, I wanted to learn Rust, so I went through the [Rust documentation](https://doc.rust-lang.org/) to learn the language. However, because the Inverted Index in COMPSCI 377 was intended as a way to get familiar with C++ and not really relevant to Operating Systems, I added the multithreaded functionality to the program.
+
+I kept the overall structure and main functionality of the program extremely similar to the original, so that comparisons can be made more directly. Under the hood, in the `main.rs` script, everything is handled by three main functions:
+
+`build_inverted_index(input: &String) -> BTreeMap<String, BTreeSet<usize>>)`
+
+Creates and returns an inverted index, which is a map of key value pairs. The key is the word, and the value is a set of the document indexes (0 for the first document, 1 for the second, 2 for the third, etc). The inverted_index variable starts out as an Arc Mutex, and the function spawns a thread for each document that needs to be processed, and joins them all together before returning the inner value of the mutex, which is the inverted_index itself.
+
+`process_file(file: &String, file_index: usize, inverted_index: &Mutex<BTreeMap<String, BTreeSet<usize>>>)`
+
+Loops through every word in a file, processes the word to remove non-alphabetic characters, and makes the whole word lowercase before adding it to the inverted_index. The inverted_index is an Arc Mutex, so it is locked. This makes sure that only one thread can directly add to the index at a time. This was crucial as it prevents race conditions and ensures thread safety. Since Arc Copies are being made of the index each time a thread is spawned, we do not need to unlock the mutex.
+
+`print_inverted_index(inverted_index: &BTreeMap<String, BTreeSet<usize>>)`
+
+Self explanatory, prints out the inverted_index the same way that the original C++ project does.
+
+The other reason I added multithreaded functionality was when I took into consideration that in the real world, inverted indexes are created to store incredibely large amounts of data from _huge_ documents. This means it could take a while to process all of that data, so using multiple threads would help in creating that index in a more effecient manner. This of course meant avoiding race conditions, but thankfully, Rust includes Arc, which is Atomic Reference Counting. This creates a thread-safe pointer, allowing multiple entities to have ownership over the key variables in question. Combining this with mutex's means we can have safe, shared access to our inverted_index variable.
+
 ### Additions/differences from the original C++ version
 
 - Rewritten in Rust, much simpler and easier to work with code overall
